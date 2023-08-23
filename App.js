@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import RadioGroup from "react-native-radio-buttons-group";
 
 import {
   ScrollView,
@@ -10,6 +11,8 @@ import {
   Button,
   Alert,
   TouchableHighlight,
+  Switch,
+  ActionSheetIOS,
 } from "react-native";
 
 export default function App() {
@@ -18,6 +21,8 @@ export default function App() {
   const [gender, setGender] = useState("male");
   const [time, setTime] = useState(1);
 
+  const [hidden, setHidden] = useState(false);
+
   // alkoholipitoisuus veressä
   const [level, setLevel] = useState(0);
 
@@ -25,6 +30,23 @@ export default function App() {
     Alert.alert("giiiii");
   }
 
+  const radioButtons = useMemo(
+    () => [
+      {
+        id: "1", // acts as primary key, should be unique and non-empty string
+        label: "Option 1",
+        value: "option1",
+      },
+      {
+        id: "2",
+        label: "Option 2",
+        value: "option2",
+      },
+    ],
+    []
+  );
+
+  const [selectedId, setSelectedId] = useState();
   function calculate() {
     // e.preventDefault();
     let litres = bottles * 0.33;
@@ -43,24 +65,42 @@ export default function App() {
     }
   }
 
+  const changeStatusBarVisibility = () => setHidden(!hidden);
+
   return (
     <ScrollView style={styles.scrollView}>
+      <StatusBar hidden={hidden} />
       <View style={styles.container}>
-        <View style={styles.container}>
+        <View>
           <Text>Alcometer</Text>
         </View>
+        <View>
+          <Switch></Switch>
+        </View>
 
-        <View style={styles.container}>
-          <StatusBar style="auto" />
+        <View>
           <TextInput></TextInput>
           <Button title="Hii" onPress={paina} />
           <TouchableHighlight>
-            <Text>kkkkk</Text>
+            <Text>kkkkjhvkjhvk</Text>
           </TouchableHighlight>
         </View>
-        <View style={styles.container}>
+        <View>
           <Button title="Hii" onPress={paina} />
+          <Button
+            title="Toggle StatusBar"
+            onPress={changeStatusBarVisibility}
+          />
+          <Switch
+            title="Toggle StatusBar"
+            onChange={changeStatusBarVisibility}
+          ></Switch>
         </View>
+        <RadioGroup
+          radioButtons={radioButtons}
+          onPress={setSelectedId}
+          selectedId={selectedId}
+        />
       </View>
     </ScrollView>
   );
@@ -72,7 +112,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: StatusBar.currentHeight,
+    paddingTop: "auto",
   },
   scrollView: {
     backgroundColor: "pink",
