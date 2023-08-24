@@ -70,35 +70,33 @@ export default function App() {
   return (
     <ScrollView style={styles.scrollView}>
       <StatusBar hidden={hidden} />
+      <View style={styles.toggle}>
+        <Switch
+          title="Toggle StatusBar"
+          onChange={changeStatusBarVisibility}
+        ></Switch>
+      </View>
       <View style={styles.container}>
+        <Text>Alcometer</Text>
+
         <View>
-          <Text>Alcometer</Text>
-        </View>
-        <View>
-          <Switch
-            title="Toggle StatusBar"
-            onChange={changeStatusBarVisibility}
-          ></Switch>
-        </View>
-        <View>
+          <Text>Set weight</Text>
           <TextInput
             style={styles.input}
-            // onChangeText={onChangeNumber}
-            value={gender}
-            placeholder="useless placeholder"
+            onChangeText={() => setWeight}
+            value={weight}
             keyboardType="numeric"
           />
         </View>
 
         <View>
-          <Button title="Hii" onPress={paina} />
+          <Text>Bottles</Text>
         </View>
+
         <View>
-          <Button
-            title="Toggle StatusBar"
-            onPress={changeStatusBarVisibility}
-          />
+          <Text>Time</Text>
         </View>
+
         <View style={styles.radio}>
           <RadioGroup
             radioButtons={radioButtons}
@@ -106,6 +104,9 @@ export default function App() {
             selectedId={selectedId}
             layout="row"
           />
+        </View>
+        <View style={styles.calculate}>
+          <Button title="Calculate" onPress={calculate} />
         </View>
       </View>
     </ScrollView>
@@ -120,15 +121,24 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 40,
   },
+  toggle: {
+    marginTop: 40,
+    justifyContent: "left",
+    alignItems: "left",
+  },
   scrollView: {
     backgroundColor: "pink",
     // marginVertical: 30,
   },
   radio: {
+    marginTop: 40,
     backgroundColor: "green",
     justifyContent: "left",
   },
   input: {
     backgroundColor: "purple",
+  },
+  calculate: {
+    marginTop: 40,
   },
 });
