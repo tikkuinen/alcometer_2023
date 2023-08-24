@@ -34,13 +34,13 @@ export default function App() {
     () => [
       {
         id: "1", // acts as primary key, should be unique and non-empty string
-        label: "Option 1",
-        value: "option1",
+        label: "Mies",
+        value: "mies",
       },
       {
         id: "2",
-        label: "Option 2",
-        value: "option2",
+        label: "Nainen",
+        value: "nainen",
       },
     ],
     []
@@ -75,32 +75,38 @@ export default function App() {
           <Text>Alcometer</Text>
         </View>
         <View>
-          <Switch></Switch>
-        </View>
-
-        <View>
-          <TextInput></TextInput>
-          <Button title="Hii" onPress={paina} />
-          <TouchableHighlight>
-            <Text>kkkkjhvkjhvk</Text>
-          </TouchableHighlight>
-        </View>
-        <View>
-          <Button title="Hii" onPress={paina} />
-          <Button
-            title="Toggle StatusBar"
-            onPress={changeStatusBarVisibility}
-          />
           <Switch
             title="Toggle StatusBar"
             onChange={changeStatusBarVisibility}
           ></Switch>
         </View>
-        <RadioGroup
-          radioButtons={radioButtons}
-          onPress={setSelectedId}
-          selectedId={selectedId}
-        />
+        <View>
+          <TextInput
+            style={styles.input}
+            // onChangeText={onChangeNumber}
+            value={gender}
+            placeholder="useless placeholder"
+            keyboardType="numeric"
+          />
+        </View>
+
+        <View>
+          <Button title="Hii" onPress={paina} />
+        </View>
+        <View>
+          <Button
+            title="Toggle StatusBar"
+            onPress={changeStatusBarVisibility}
+          />
+        </View>
+        <View style={styles.radio}>
+          <RadioGroup
+            radioButtons={radioButtons}
+            onPress={setSelectedId}
+            selectedId={selectedId}
+            layout="row"
+          />
+        </View>
       </View>
     </ScrollView>
   );
@@ -112,10 +118,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: "auto",
+    marginTop: 40,
   },
   scrollView: {
     backgroundColor: "pink",
-    marginHorizontal: 20,
+    // marginVertical: 30,
+  },
+  radio: {
+    backgroundColor: "green",
+    justifyContent: "left",
+  },
+  input: {
+    backgroundColor: "purple",
   },
 });
