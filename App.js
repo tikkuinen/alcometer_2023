@@ -26,10 +26,6 @@ export default function App() {
   // alkoholipitoisuus veressä
   const [level, setLevel] = useState(0);
 
-  function paina() {
-    Alert.alert("giiiii");
-  }
-
   const radioButtons = useMemo(
     () => [
       {
@@ -47,8 +43,8 @@ export default function App() {
   );
 
   const [selectedId, setSelectedId] = useState();
+
   function calculate() {
-    // e.preventDefault();
     let litres = bottles * 0.33;
     let grams = litres * 8 * 4.5;
     let burning = weight / 10;
@@ -65,16 +61,12 @@ export default function App() {
     }
   }
 
-  const changeStatusBarVisibility = () => setHidden(!hidden);
-
   return (
     <ScrollView style={styles.scrollView}>
       <StatusBar hidden={hidden} />
+      <StatusBar style="auto" />
       <View style={styles.toggle}>
-        <Switch
-          title="Toggle StatusBar"
-          onChange={changeStatusBarVisibility}
-        ></Switch>
+        <Switch title="Toggle StatusBar"></Switch>
       </View>
       <View style={styles.container}>
         <Text>Alcometer</Text>
@@ -85,16 +77,28 @@ export default function App() {
             style={styles.input}
             onChangeText={() => setWeight}
             value={weight}
-            keyboardType="numeric"
+            keyboardType="number-pad"
           />
         </View>
 
         <View>
           <Text>Bottles</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={() => setBottles}
+            value={bottles}
+            keyboardType="number-pad"
+          />
         </View>
 
         <View>
           <Text>Time</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={() => setTime}
+            value={time}
+            keyboardType="number-pad"
+          />
         </View>
 
         <View style={styles.radio}>
@@ -107,6 +111,7 @@ export default function App() {
         </View>
         <View style={styles.calculate}>
           <Button title="Calculate" onPress={calculate} />
+          <Text>{level}</Text>
         </View>
       </View>
     </ScrollView>
@@ -136,7 +141,9 @@ const styles = StyleSheet.create({
     justifyContent: "left",
   },
   input: {
-    backgroundColor: "purple",
+    padding: 5,
+    borderWidth: 1,
+    marginBottom: 10,
   },
   calculate: {
     marginTop: 40,
