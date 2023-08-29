@@ -1,81 +1,83 @@
 import { useMemo, useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import Styles from "./styles/Styles";
 import RadioGroup from "react-native-radio-buttons-group";
 
 import {
   ScrollView,
-  StyleSheet,
   Text,
   TextInput,
   View,
   Button,
-  Alert,
-  TouchableHighlight,
   Switch,
-  ActionSheetIOS,
 } from "react-native";
 
 export default function App() {
   const [weight, setWeight] = useState(80);
-  const [bottles, setBottles] = useState(0);
+  const [bottles, setBottles] = useState(1);
   const [gender, setGender] = useState("male");
   const [time, setTime] = useState(1);
 
   const [hidden, setHidden] = useState(false);
 
   // alkoholipitoisuus veressä
-  const [level, setLevel] = useState(0);
+  const [level, setLevel] = useState("");
 
-  const radioButtons = useMemo(
-    () => [
-      {
-        id: "1", // acts as primary key, should be unique and non-empty string
-        label: "Mies",
-        value: "mies",
-      },
-      {
-        id: "2",
-        label: "Nainen",
-        value: "nainen",
-      },
-    ],
-    []
-  );
+  // const radioButtons = useMemo(
+  //   () => [
+  //     {
+  //       id: "1", // acts as primary key, should be unique and non-empty string
+  //       label: "Mies",
+  //       value: "mies",
+  //     },
+  //     {
+  //       id: "2",
+  //       label: "Nainen",
+  //       value: "nainen",
+  //     },
+  //   ],
+  //   []
+  // );
 
   const [selectedId, setSelectedId] = useState();
 
-  function calculate() {
-    let litres = bottles * 0.33;
+  function calculate(e) {
+    e.preventDefault();
+    // tarkista tarviiko olla noita Number
+    let litres = Number(bottles) * 0.33;
     let grams = litres * 8 * 4.5;
-    let burning = weight / 10;
-    let gramsLeft = grams - burning * time;
+    let burning = Number(weight) / 10;
+    let gramsLeft = grams - burning * Number(time);
 
+    // kato onko tää hyvä
     if (gender === "male") {
-      setLevel(gramsLeft / (weight * 0.7));
+      result = gramsLeft / (weight * 0.7);
     } else {
-      setLevel(gramsLeft / (weight * 0.6));
+      result = gramsLeft / (weight * 0.6);
     }
 
-    if (level < 0) {
-      setLevel(0);
+    if (result < 0) {
+      result = 0; // setResult(0) tää olis varmaan ollut se tilamuuttujaversio eli siitä tuli miinusta
     }
+
+    setLevel(result);
   }
 
   return (
-    <ScrollView style={styles.scrollView}>
+    <ScrollView style={Styles.scrollView}>
       <StatusBar hidden={hidden} />
       <StatusBar style="auto" />
-      <View style={styles.toggle}>
+      <View style={Styles.toggle}>
         <Switch title="Toggle StatusBar"></Switch>
       </View>
-      <View style={styles.container}>
+      <View style={Styles.container}>
         <Text>Alcometer</Text>
 
         <View>
           <Text>Set weight</Text>
           <TextInput
-            style={styles.input}
-            onChangeText={() => setWeight}
+            style={Styles.input}
+            onChangeText={setWeight}
             value={weight}
             keyboardType="number-pad"
           />
@@ -84,8 +86,8 @@ export default function App() {
         <View>
           <Text>Bottles</Text>
           <TextInput
-            style={styles.input}
-            onChangeText={() => setBottles}
+            style={Styles.input}
+            onChangeText={setBottles}
             value={bottles}
             keyboardType="number-pad"
           />
@@ -94,22 +96,22 @@ export default function App() {
         <View>
           <Text>Time</Text>
           <TextInput
-            style={styles.input}
-            onChangeText={() => setTime}
+            style={Styles.input}
+            onChangeText={setTime}
             value={time}
             keyboardType="number-pad"
           />
         </View>
 
-        <View style={styles.radio}>
-          <RadioGroup
+        <View style={Styles.radio}>
+          {/* <RadioGroup
             radioButtons={radioButtons}
             onPress={setSelectedId}
             selectedId={selectedId}
             layout="row"
-          />
+          /> */}
         </View>
-        <View style={styles.calculate}>
+        <View style={Styles.calculate}>
           <Button title="Calculate" onPress={calculate} />
           <Text>{level}</Text>
         </View>
@@ -117,35 +119,3 @@ export default function App() {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 3,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-  },
-  toggle: {
-    marginTop: 40,
-    justifyContent: "left",
-    alignItems: "left",
-  },
-  scrollView: {
-    backgroundColor: "pink",
-    // marginVertical: 30,
-  },
-  radio: {
-    marginTop: 40,
-    backgroundColor: "green",
-    justifyContent: "left",
-  },
-  input: {
-    padding: 5,
-    borderWidth: 1,
-    marginBottom: 10,
-  },
-  calculate: {
-    marginTop: 40,
-  },
-});
