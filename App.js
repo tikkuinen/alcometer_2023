@@ -8,8 +8,8 @@ import {
   Text,
   TextInput,
   View,
-  Button,
   Switch,
+  TouchableOpacity,
 } from "react-native";
 
 export default function App() {
@@ -22,6 +22,10 @@ export default function App() {
 
   // alkoholipitoisuus veressä
   const [level, setLevel] = useState("");
+
+  // voi se tulos olla tavallinen let
+  // Numberin voi laittaa vasta lopussa
+  // tee oma nappi
 
   // const radioButtons = useMemo(
   //   () => [
@@ -62,6 +66,14 @@ export default function App() {
 
     setLevel(result);
   }
+
+  const CalculateButton = () => {
+    return (
+      <TouchableOpacity style={Styles.button} onPress={calculate}>
+        <Text>Laske tästä</Text>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <ScrollView style={Styles.scrollView}>
@@ -112,8 +124,8 @@ export default function App() {
           /> */}
         </View>
         <View style={Styles.calculate}>
-          <Button title="Calculate" onPress={calculate} />
-          <Text>{level}</Text>
+          <CalculateButton />
+          <Text>Tulos tähän</Text>
         </View>
       </View>
     </ScrollView>
