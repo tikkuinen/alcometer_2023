@@ -1,58 +1,66 @@
 import { StyleSheet } from "react-native";
 
-export default StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    margin: 10,
-    //backgroundColor: "#fff",
-    //alignItems: "center",
-    //justifyContent: "center",
-    //marginTop: 40,
+const DarkTheme = StyleSheet.create({
+  scrollView: {
+    backgroundColor: "#8CBDE6",
   },
-  textInput: {
-    padding: 5,
-    borderWidth: 1,
-    marginBottom: 10,
+  toggle: {
+    // switch
+    marginTop: 40,
+    justifyContent: "left",
+    alignItems: "left",
+    marginLeft: 20,
+  },
+  container: {
+    // switchin alapuolinen osa kokonaisuudessaan
+    flex: 1,
+    alignItems: "left",
+    justifyContent: "center",
+    marginLeft: 50,
+
+    marginTop: 50,
   },
   button: {
     borderWidth: 2,
     borderRadius: 10,
+    borderColor: "#3B5061",
+    marginTop: 30,
     padding: 10,
     width: 200,
     alignItems: "center",
-    backgroundColor: "green",
+    backgroundColor: "#3678AD",
   },
-  label: {
-    fontSize: 18,
+  buttonText: {
     fontWeight: "bold",
+    color: "black",
+    fontSize: 25,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 40,
   },
   result: {
     color: "#ffffff",
     fontSize: 18,
     fontWeight: "bold",
+    textAlign: "center",
+    margin: 50,
+    borderWidth: 2,
   },
-  toggle: {
-    marginTop: 40,
-    justifyContent: "left",
-    alignItems: "left",
-  },
-  scrollView: {
-    backgroundColor: "pink",
-    // marginVertical: 30,
-  },
-  radio: {
-    marginTop: 40,
-    backgroundColor: "green",
-    justifyContent: "left",
-  },
+
   input: {
     padding: 5,
     borderWidth: 1,
     marginBottom: 10,
   },
-  calculate: {
-    marginTop: 40,
+});
+
+const LightTheme = StyleSheet.create({
+  scrollView: {
+    ...DarkTheme.scrollView,
+    backgroundColor: "#b314a6",
   },
 });
+
+export { DarkTheme, LightTheme };
