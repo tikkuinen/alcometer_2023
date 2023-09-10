@@ -6,6 +6,9 @@ const DarkTheme = StyleSheet.create({
     backgroundColor: "green",
     flex: 1,
   },
+  scrollView: {
+    flex: 1,
+  },
   headerArea: {
     flex: 1,
     backgroundColor: "blue",

@@ -83,54 +83,56 @@ export default function App() {
 
   return (
     <SafeAreaView style={currentStyle.container}>
-      <View style={currentStyle.headerArea}>
-        <View style={currentStyle.switchArea}>
-          <Switch title="Toggle StatusBar"></Switch>
-        </View>
-        <View style={currentStyle.header}>
-          <Text style={currentStyle.headerText}>Alcometer</Text>
-        </View>
-      </View>
-
-      <View style={currentStyle.inputArea}>
-        <View style={currentStyle.inputView}>
-          <View>
-            <Text style={currentStyle.labelText}>Set weight</Text>
+      <ScrollView contentContainerStyle={currentStyle.scrollView}>
+        <View style={currentStyle.headerArea}>
+          <View style={currentStyle.switchArea}>
+            <Switch title="Toggle StatusBar"></Switch>
           </View>
-          <View>
-            <TextInput
-              style={currentStyle.input}
-              onChangeText={setWeight}
-              value={weight}
-              keyboardType="number-pad"
-            />
+          <View style={currentStyle.header}>
+            <Text style={currentStyle.headerText}>Alcometer</Text>
           </View>
         </View>
 
-        <View style={currentStyle.inputView}>
-          <View>
-            <Text style={currentStyle.labelText}>Bottles</Text>
+        <View style={currentStyle.inputArea}>
+          <View style={currentStyle.inputView}>
+            <View>
+              <Text style={currentStyle.labelText}>Set weight</Text>
+            </View>
+            <View>
+              <TextInput
+                style={currentStyle.input}
+                onChangeText={setWeight}
+                value={weight}
+                keyboardType="number-pad"
+              />
+            </View>
           </View>
-          <View>
-            <Text> nappula</Text>
+
+          <View style={currentStyle.inputView}>
+            <View>
+              <Text style={currentStyle.labelText}>Bottles</Text>
+            </View>
+            <View>
+              <Text> nappula</Text>
+            </View>
+          </View>
+
+          <View style={currentStyle.inputView}>
+            <View>
+              <Text style={currentStyle.labelText}>Time</Text>
+            </View>
+            <View>
+              <Text> nappula</Text>
+            </View>
           </View>
         </View>
 
-        <View style={currentStyle.inputView}>
-          <View>
-            <Text style={currentStyle.labelText}>Time</Text>
-          </View>
-          <View>
-            <Text> nappula</Text>
-          </View>
+        <View style={currentStyle.buttonArea}>
+          <Text style={currentStyle.result}>{level}</Text>
+
+          <CalculateButton />
         </View>
-      </View>
-
-      <View style={currentStyle.buttonArea}>
-        <Text style={currentStyle.result}>{level}</Text>
-
-        <CalculateButton />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
