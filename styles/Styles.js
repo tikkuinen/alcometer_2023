@@ -1,58 +1,74 @@
 import { StyleSheet } from "react-native";
 
 const DarkTheme = StyleSheet.create({
-  scrollView: {
-    backgroundColor: "#8CBDE6",
-  },
-  toggle: {
-    // switch
-    marginTop: 40,
-    justifyContent: "left",
-    alignItems: "left",
-    marginLeft: 20,
-  },
   container: {
-    // switchin alapuolinen osa kokonaisuudessaan
+    // koko paska
+    backgroundColor: "green",
     flex: 1,
-    alignItems: "left",
+  },
+  headerArea: {
+    flex: 1,
+    backgroundColor: "blue",
+  },
+  switchArea: {
+    flex: 1,
+    paddingLeft: 10,
+    paddingTop: 10,
+  },
+  header: {
+    flex: 2,
+    alignItems: "center",
     justifyContent: "center",
-    marginLeft: 50,
+  },
+  headerText: {
+    fontWeight: "bold",
+    fontSize: 32,
+    // fontti
+  },
 
-    marginTop: 50,
+  inputArea: {
+    backgroundColor: "#23ddea",
+    flex: 3,
+  },
+  inputView: {
+    backgroundColor: "#d91ccf",
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    margin: 40,
+  },
+  input: {
+    borderWidth: 1,
+    width: 100,
+  },
+  labelText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  buttonArea: {
+    flex: 2,
+    backgroundColor: "#c8fb1e",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   button: {
     borderWidth: 2,
     borderRadius: 10,
     borderColor: "#3B5061",
-    marginTop: 30,
     padding: 10,
+    marginBottom: 100,
     width: 200,
     alignItems: "center",
     backgroundColor: "#3678AD",
   },
   buttonText: {
-    fontWeight: "bold",
-    color: "black",
-    fontSize: 25,
-  },
-  header: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 40,
   },
   result: {
-    color: "#ffffff",
-    fontSize: 18,
+    fontSize: 32,
     fontWeight: "bold",
     textAlign: "center",
-    margin: 50,
-    borderWidth: 2,
-  },
-
-  input: {
-    padding: 5,
-    borderWidth: 1,
-    marginBottom: 10,
   },
 });
 
