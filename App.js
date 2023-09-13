@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import Styles, { DarkTheme, LightTheme } from "./styles/Styles";
+import { useState, useMemo } from "react";
+import { DarkTheme, LightTheme } from "./styles/Styles";
+import NumericInput from "react-native-numeric-input";
 import RadioGroup from "react-native-radio-buttons-group";
 
 import {
@@ -12,39 +12,19 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
+import { RadioButton, RadioButtonIOS } from "react-native-paper";
+
+//import RadioButtonIOS from "react-native-paper/lib/typescript/components/RadioButton/RadioButtonIOS";
 
 export default function App() {
   const [weight, setWeight] = useState(10);
   const [bottles, setBottles] = useState(1);
   const [gender, setGender] = useState("male");
   const [time, setTime] = useState(1);
-
   const [level, setLevel] = useState(0);
 
   const [style, setStyle] = useState(true);
-
   let currentStyle = style ? DarkTheme : LightTheme;
-
-  // liittyy statusbariiin ei tarvi
-  const [hidden, setHidden] = useState(false);
-
-  // const radioButtons = useMemo(
-  //   () => [
-  //     {
-  //       id: "1", // acts as primary key, should be unique and non-empty string
-  //       label: "Mies",
-  //       value: "mies",
-  //     },
-  //     {
-  //       id: "2",
-  //       label: "Nainen",
-  //       value: "nainen",
-  //     },
-  //   ],
-  //   []
-  // );
-
-  const [selectedId, setSelectedId] = useState();
 
   function calculate() {
     // jonkin sortin tarkistuksia
@@ -81,10 +61,39 @@ export default function App() {
     );
   };
 
+  const SexRadioButton = () => {
+    const radioButtons = useMemo(
+      () => [
+        {
+          id: "1", // acts as primary key, should be unique and non-empty string
+          label: "Male",
+          value: "male",
+        },
+        {
+          id: "2",
+          label: "Female",
+          value: "female",
+        },
+      ],
+      []
+    );
+
+    return (
+      <>
+        <RadioGroup
+          radioButtons={radioButtons}
+          onPress={setGender}
+          selectedId={gender}
+        />
+        <Text>{gender}</Text>
+      </>
+    );
+  };
+
   return (
     <SafeAreaView style={currentStyle.container}>
       <ScrollView contentContainerStyle={currentStyle.scrollView}>
-        <View style={currentStyle.headerArea}>
+        {/* <View style={currentStyle.headerArea}>
           <View style={currentStyle.switchArea}>
             <Switch title="Toggle StatusBar"></Switch>
           </View>
@@ -113,7 +122,7 @@ export default function App() {
               <Text style={currentStyle.labelText}>Bottles</Text>
             </View>
             <View>
-              <Text> nappula</Text>
+              <NumericInput></NumericInput>
             </View>
           </View>
 
@@ -122,7 +131,7 @@ export default function App() {
               <Text style={currentStyle.labelText}>Time</Text>
             </View>
             <View>
-              <Text> nappula</Text>
+              <NumericInput></NumericInput>
             </View>
           </View>
         </View>
@@ -130,8 +139,11 @@ export default function App() {
         <View style={currentStyle.buttonArea}>
           <Text style={currentStyle.result}>{level}</Text>
 
-          <CalculateButton />
+          <CalculateButton /> */}
+        <View>
+          <SexRadioButton />
         </View>
+        {/* </View> */}
       </ScrollView>
     </SafeAreaView>
   );
