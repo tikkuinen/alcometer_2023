@@ -26,6 +26,46 @@ export default function App() {
   const [style, setStyle] = useState(true);
   let currentStyle = style ? DarkTheme : LightTheme;
 
+  const CalculateButton = () => {
+    return (
+      <TouchableOpacity onPress={calculate}>
+        <View style={currentStyle.button}>
+          <Text style={currentStyle.buttonText}>Calculate</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  const SexRadioButton = () => {
+    const radioButtons = useMemo(
+      () => [
+        {
+          id: "male", // acts as primary key, should be unique and non-empty string
+          label: "Male",
+        },
+        {
+          id: "female",
+          label: "Female",
+        },
+      ],
+      []
+    );
+
+    return (
+      <>
+        <RadioGroup
+          radioButtons={radioButtons}
+          onPress={setGender}
+          selectedId={gender}
+          layout="row"
+        />
+      </>
+    );
+  };
+
+  // ota varulta pois lopuksi
+  console.log(gender);
+
   function calculate() {
     // jonkin sortin tarkistuksia
     let validated = weight > 0 ? weight : 80;
@@ -51,49 +91,10 @@ export default function App() {
     setLevel(result);
   }
 
-  const CalculateButton = () => {
-    return (
-      <TouchableOpacity onPress={calculate}>
-        <View style={currentStyle.button}>
-          <Text style={currentStyle.buttonText}>Calculate</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
-
-  const SexRadioButton = () => {
-    const radioButtons = useMemo(
-      () => [
-        {
-          id: "1", // acts as primary key, should be unique and non-empty string
-          label: "Male",
-          value: "male",
-        },
-        {
-          id: "2",
-          label: "Female",
-          value: "female",
-        },
-      ],
-      []
-    );
-
-    return (
-      <>
-        <RadioGroup
-          radioButtons={radioButtons}
-          onPress={setGender}
-          selectedId={gender}
-        />
-        <Text>{gender}</Text>
-      </>
-    );
-  };
-
   return (
     <SafeAreaView style={currentStyle.container}>
       <ScrollView contentContainerStyle={currentStyle.scrollView}>
-        {/* <View style={currentStyle.headerArea}>
+        <View style={currentStyle.headerArea}>
           <View style={currentStyle.switchArea}>
             <Switch title="Toggle StatusBar"></Switch>
           </View>
@@ -134,16 +135,18 @@ export default function App() {
               <NumericInput></NumericInput>
             </View>
           </View>
+          <View style={currentStyle.radioView}>
+            <View>
+              <SexRadioButton />
+            </View>
+          </View>
         </View>
 
         <View style={currentStyle.buttonArea}>
           <Text style={currentStyle.result}>{level}</Text>
 
-          <CalculateButton /> */}
-        <View>
-          <SexRadioButton />
+          <CalculateButton />
         </View>
-        {/* </View> */}
       </ScrollView>
     </SafeAreaView>
   );

@@ -48,6 +48,12 @@ const DarkTheme = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  radioView: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   buttonArea: {
     flex: 2,
     backgroundColor: "#c8fb1e",
