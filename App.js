@@ -5,19 +5,21 @@ import RadioGroup from "react-native-radio-buttons-group";
 
 import {
   ScrollView,
+  StatusBar,
   Text,
   TextInput,
   View,
   Switch,
   TouchableOpacity,
   SafeAreaView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
-import { RadioButton, RadioButtonIOS } from "react-native-paper";
 
 //import RadioButtonIOS from "react-native-paper/lib/typescript/components/RadioButton/RadioButtonIOS";
 
 export default function App() {
-  const [weight, setWeight] = useState(10);
+  const [weight, setWeight] = useState("88");
   const [bottles, setBottles] = useState(1);
   const [gender, setGender] = useState("male");
   const [time, setTime] = useState(1);
@@ -53,12 +55,65 @@ export default function App() {
 
     return (
       <>
-        <RadioGroup
-          radioButtons={radioButtons}
-          onPress={setGender}
-          selectedId={gender}
-          layout="row"
-        />
+        <View style={currentStyle.radioView}>
+          <View>
+            <RadioGroup
+              radioButtons={radioButtons}
+              onPress={setGender}
+              selectedId={gender}
+              layout="row"
+            />
+          </View>
+        </View>
+      </>
+    );
+  };
+
+  const WeightInput = () => {
+    //const [weight, setWeight] = useState("88");
+    return <></>;
+  };
+
+  const BottleInput = () => {
+    return (
+      <>
+        <View style={currentStyle.inputView}>
+          <View>
+            <Text style={currentStyle.labelText}>Bottles</Text>
+          </View>
+          <View>
+            <NumericInput
+              rounded
+              minValue={0}
+              maxValue={5}
+              value={bottles}
+              onChange={(val) => setBottles(val)}
+            ></NumericInput>
+          </View>
+        </View>
+      </>
+    );
+  };
+
+  const TimeInput = () => {
+    return (
+      <>
+        <View style={currentStyle.inputView}>
+          <View>
+            <Text style={currentStyle.labelText}>Time</Text>
+          </View>
+          <View>
+            <NumericInput
+              rounded
+              minValue={0}
+              maxValue={12}
+              value={time}
+              onChange={(val) => setTime(val)}
+              rightButtonBackgroundColor={"green"}
+              leftButtonBackgroundColor={"green"}
+            ></NumericInput>
+          </View>
+        </View>
       </>
     );
   };
@@ -67,15 +122,15 @@ export default function App() {
   console.log(gender);
 
   function calculate() {
-    // jonkin sortin tarkistuksia
-    let validated = weight > 0 ? weight : 80;
-    console.log(validated);
+    let validated = weight < 0 ? "0" : weight;
+    // miten infinityn saa pois. lol
 
     // tarkista tarviiko olla noita Number
     let litres = Number(bottles) * 0.33;
     let grams = litres * 8 * 4.5;
     let burning = Number(validated) / 10;
     let gramsLeft = grams - burning * Number(time);
+    let result = 0;
 
     // kato onko tää hyvä
     if (gender === "male") {
@@ -93,61 +148,45 @@ export default function App() {
 
   return (
     <SafeAreaView style={currentStyle.container}>
-      <ScrollView contentContainerStyle={currentStyle.scrollView}>
-        <View style={currentStyle.headerArea}>
-          <View style={currentStyle.switchArea}>
-            <Switch title="Toggle StatusBar"></Switch>
+      {/* <ScrollView style={currentStyle.scrollView}> */}
+
+      <View style={currentStyle.headerArea}>
+        <View style={currentStyle.switchArea}>
+          <Switch title={"vitunpaskaa"}></Switch>
+        </View>
+        <View style={currentStyle.header}>
+          <Text style={currentStyle.headerText}>Alcometer</Text>
+        </View>
+      </View>
+      <View style={currentStyle.inputArea}>
+        <View style={currentStyle.inputView}>
+          <View>
+            <Text style={currentStyle.labelText}>Set weight</Text>
           </View>
-          <View style={currentStyle.header}>
-            <Text style={currentStyle.headerText}>Alcometer</Text>
+          <View>
+            <TextInput
+              style={currentStyle.input}
+              onChangeText={(text) => setWeight(text)}
+              keyboardType="numeric"
+              returnKeyType="done"
+              value={weight}
+              clearButtonMode="always"
+              clearTextOnFocus={true}
+              maxLength={3}
+            />
           </View>
         </View>
+        <BottleInput />
+        <TimeInput />
+        <SexRadioButton />
+      </View>
 
-        <View style={currentStyle.inputArea}>
-          <View style={currentStyle.inputView}>
-            <View>
-              <Text style={currentStyle.labelText}>Set weight</Text>
-            </View>
-            <View>
-              <TextInput
-                style={currentStyle.input}
-                onChangeText={setWeight}
-                value={weight}
-                keyboardType="number-pad"
-              />
-            </View>
-          </View>
+      <View style={currentStyle.buttonArea}>
+        <Text style={currentStyle.result}>{level}</Text>
+        <CalculateButton />
+      </View>
 
-          <View style={currentStyle.inputView}>
-            <View>
-              <Text style={currentStyle.labelText}>Bottles</Text>
-            </View>
-            <View>
-              <NumericInput></NumericInput>
-            </View>
-          </View>
-
-          <View style={currentStyle.inputView}>
-            <View>
-              <Text style={currentStyle.labelText}>Time</Text>
-            </View>
-            <View>
-              <NumericInput></NumericInput>
-            </View>
-          </View>
-          <View style={currentStyle.radioView}>
-            <View>
-              <SexRadioButton />
-            </View>
-          </View>
-        </View>
-
-        <View style={currentStyle.buttonArea}>
-          <Text style={currentStyle.result}>{level}</Text>
-
-          <CalculateButton />
-        </View>
-      </ScrollView>
+      {/* </ScrollView> */}
     </SafeAreaView>
   );
 }
