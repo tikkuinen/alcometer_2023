@@ -22,9 +22,18 @@ export default function App() {
   const [style, setStyle] = useState(true);
 
   let currentStyle = style ? DarkTheme : LightTheme;
+  let resultStyle = "";
 
-  let resultStyle =
-    level <= 0.2 ? currentStyle.resultOk : currentStyle.resultNo;
+  if (level > 0.2) {
+    resultStyle = currentStyle.resultNo;
+    console.log("ok: " + level);
+  } else if (level > 0) {
+    resultStyle = currentStyle.resultCareful;
+    console.log("careful: " + level);
+  } else {
+    resultStyle = currentStyle.resultOk;
+    console.log("no: " + level);
+  }
 
   const CalculateButton = () => {
     function calculate() {
