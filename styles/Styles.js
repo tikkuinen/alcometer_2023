@@ -6,9 +6,9 @@ const DarkTheme = StyleSheet.create({
     backgroundColor: "green",
     flex: 1,
   },
-  scrollView: {},
   headerArea: {
-    flex: 1,
+    //flex: 1,
+    height: 150,
     backgroundColor: "blue",
   },
   switchArea: {
@@ -62,7 +62,8 @@ const DarkTheme = StyleSheet.create({
     paddingBottom: 20,
   },
   buttonArea: {
-    flex: 1,
+    height: 150,
+    //flex: 1,
     backgroundColor: "#c8fb1e",
     alignItems: "center",
     justifyContent: "flex-start",
@@ -82,10 +83,25 @@ const DarkTheme = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
   },
-  result: {
+  resultOk: {
     fontSize: 32,
     fontWeight: "bold",
     textAlign: "center",
+    color: "lightgreen",
+    paddingBottom: 10,
+  },
+  resultCareful: {
+    fontSize: 32,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "yellow",
+    paddingBottom: 10,
+  },
+  resultNo: {
+    fontSize: 32,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "red",
     paddingBottom: 10,
   },
 });
