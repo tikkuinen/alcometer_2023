@@ -1,8 +1,7 @@
-import { useState, useMemo, useEffect } from "react";
-import { DarkTheme, LightTheme } from "./styles/Styles";
+import { useState, useMemo } from "react";
+import { AquaTheme, PinkTheme } from "./styles/Styles";
 import NumericInput from "react-native-numeric-input";
 import RadioGroup from "react-native-radio-buttons-group";
-
 import {
   ScrollView,
   Text,
@@ -19,37 +18,35 @@ export default function App() {
   const [gender, setGender] = useState("male");
   const [time, setTime] = useState(1);
   const [level, setLevel] = useState(0);
-  const [style, setStyle] = useState(true);
+  const [style, setStyle] = useState(false);
 
-  let currentStyle = style ? DarkTheme : LightTheme;
+  let currentStyle = style ? PinkTheme : AquaTheme;
+
+  // Tuloksen ehdollisuus alkoholitason mukaan
   let resultStyle = "";
 
   if (level > 0.2) {
     resultStyle = currentStyle.resultNo;
-    console.log("ok: " + level);
   } else if (level > 0) {
     resultStyle = currentStyle.resultCareful;
-    console.log("careful: " + level);
   } else {
     resultStyle = currentStyle.resultOk;
-    console.log("no: " + level);
   }
 
   const CalculateButton = () => {
     function calculate() {
-      // validaatiot
+      // Validaatio painokentälle
       if (weight === "") {
         alert("Please insert weight");
         return;
       }
-      // tarkista tarviiko olla noita Number
+
       let litres = Number(bottles) * 0.33;
       let grams = litres * 8 * 4.5;
       let burning = Number(weight) / 10;
       let gramsLeft = grams - burning * Number(time);
       let result = 0;
 
-      // kato onko tää hyvä
       if (gender === "male") {
         result = gramsLeft / (weight * 0.7);
       } else {
@@ -62,6 +59,7 @@ export default function App() {
       result = result.toFixed(2);
       setLevel(result);
     }
+
     return (
       <TouchableOpacity onPress={calculate}>
         <View style={currentStyle.button}>
@@ -109,13 +107,16 @@ export default function App() {
           <View>
             <Text style={currentStyle.labelText}>Bottles</Text>
           </View>
-          <View>
+          <View style={currentStyle.numericInput}>
             <NumericInput
               rounded
               minValue={0}
-              maxValue={5}
+              maxValue={12}
               value={bottles}
               onChange={(val) => setBottles(val)}
+              borderColor={"#037F8C"}
+              rightButtonBackgroundColor={currentStyle.numericColor}
+              leftButtonBackgroundColor={currentStyle.numericColor}
             ></NumericInput>
           </View>
         </View>
@@ -130,15 +131,16 @@ export default function App() {
           <View>
             <Text style={currentStyle.labelText}>Time</Text>
           </View>
-          <View>
+          <View style={currentStyle.numericInput}>
             <NumericInput
               rounded
               minValue={0}
-              maxValue={12}
+              maxValue={24}
               value={time}
               onChange={(val) => setTime(val)}
-              rightButtonBackgroundColor={"green"}
-              leftButtonBackgroundColor={"green"}
+              borderColor={"#037F8C"}
+              rightButtonBackgroundColor={currentStyle.numericColor}
+              leftButtonBackgroundColor={currentStyle.numericColor}
             ></NumericInput>
           </View>
         </View>
@@ -146,15 +148,24 @@ export default function App() {
     );
   };
 
-  // ota varulta pois lopuksi
-  console.log(gender);
-
   return (
     <SafeAreaView style={currentStyle.container}>
       <ScrollView style={currentStyle.scrollView}>
         <View style={currentStyle.headerArea}>
           <View style={currentStyle.switchArea}>
-            <Switch></Switch>
+            <Switch
+              value={style}
+              onValueChange={() => setStyle(!style)}
+              trackColor={{
+                false: currentStyle.trackColor,
+                true: currentStyle.trackColor,
+              }}
+              thumbColor={
+                style
+                  ? currentStyle.thumbcolorLight
+                  : currentStyle.thumbcolorDark
+              }
+            ></Switch>
           </View>
           <View style={currentStyle.header}>
             <Text style={currentStyle.headerText}>Alcometer</Text>
@@ -171,7 +182,6 @@ export default function App() {
                 value={weight}
                 onChangeText={(val) => setWeight(val)}
                 keyboardType="numeric"
-                // tarviiko tota donea?
                 returnKeyType="done"
                 clearButtonMode="always"
                 clearTextOnFocus={true}
@@ -185,8 +195,6 @@ export default function App() {
         </View>
 
         <View style={currentStyle.buttonArea}>
-          {/* ehdollisuus tyylille */}
-
           <Text style={resultStyle}>{level}</Text>
           <CalculateButton />
         </View>

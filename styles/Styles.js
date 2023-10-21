@@ -1,21 +1,20 @@
 import { StyleSheet } from "react-native";
 
-const DarkTheme = StyleSheet.create({
+const AquaTheme = StyleSheet.create({
   container: {
-    // koko paska
-    backgroundColor: "green",
+    backgroundColor: "#F2EBD5",
     flex: 1,
   },
   headerArea: {
     //flex: 1,
     height: 150,
-    backgroundColor: "blue",
+    //backgroundColor: "blue",
   },
   switchArea: {
     //flex: 1,
     paddingLeft: 10,
     paddingTop: 10,
-    backgroundColor: "#d91ccf",
+    //backgroundColor: "#d91ccf",
   },
   header: {
     flex: 2,
@@ -32,10 +31,10 @@ const DarkTheme = StyleSheet.create({
     flex: 2,
     // alignItems: "flex-end",
     // justifyContent: "space-between",
-    backgroundColor: "#23ddea",
+    //backgroundColor: "#23ddea",
   },
   inputView: {
-    backgroundColor: "#d91ccf",
+    //backgroundColor: "#d91ccf",
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -49,6 +48,11 @@ const DarkTheme = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     backgroundColor: "white",
+    borderColor: "#037F8C",
+  },
+  numericInput: {
+    backgroundColor: "white",
+    borderRadius: 15,
   },
   labelText: {
     fontSize: 20,
@@ -64,26 +68,27 @@ const DarkTheme = StyleSheet.create({
   buttonArea: {
     height: 150,
     //flex: 1,
-    backgroundColor: "#c8fb1e",
+    //backgroundColor: "#c8fb1e",
     alignItems: "center",
     justifyContent: "flex-start",
   },
   button: {
     borderWidth: 2,
-    borderRadius: 10,
-    borderColor: "#3B5061",
+    borderRadius: 15,
+    borderColor: "#037F8C",
     padding: 10,
-    //marginBottom: 100,
+    marginTop: 20,
     width: 200,
     height: 50,
     alignItems: "center",
-    backgroundColor: "#3678AD",
+    backgroundColor: "#038C8C",
   },
   buttonText: {
     fontSize: 24,
     fontWeight: "bold",
   },
   resultOk: {
+    marginTop: 10,
     fontSize: 32,
     fontWeight: "bold",
     textAlign: "center",
@@ -91,6 +96,7 @@ const DarkTheme = StyleSheet.create({
     paddingBottom: 10,
   },
   resultCareful: {
+    marginTop: 10,
     fontSize: 32,
     fontWeight: "bold",
     textAlign: "center",
@@ -98,19 +104,31 @@ const DarkTheme = StyleSheet.create({
     paddingBottom: 10,
   },
   resultNo: {
+    marginTop: 10,
     fontSize: 32,
     fontWeight: "bold",
     textAlign: "center",
     color: "red",
     paddingBottom: 10,
   },
+  numericColor: "#038C8C",
+  trackColor: "#767577",
+  thumbcolorLight: "#b314a6",
+  thumbcolorDark: "#038C8C",
 });
 
-const LightTheme = StyleSheet.create({
-  scrollView: {
-    ...DarkTheme.scrollView,
+const PinkTheme = StyleSheet.create({
+  ...AquaTheme,
+  container: {
+    ...AquaTheme.container,
+    backgroundColor: "#8FB6D9",
+  },
+  button: {
+    ...AquaTheme.button,
     backgroundColor: "#b314a6",
   },
+
+  numericColor: "#b314a6",
 });
 
-export { DarkTheme, LightTheme };
+export { AquaTheme, PinkTheme };
