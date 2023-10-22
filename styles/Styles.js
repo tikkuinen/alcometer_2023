@@ -6,15 +6,11 @@ const AquaTheme = StyleSheet.create({
     flex: 1,
   },
   headerArea: {
-    //flex: 1,
     height: 125,
-    //backgroundColor: "blue",
   },
   switchArea: {
-    //flex: 1,
     paddingLeft: 10,
     paddingTop: 10,
-    //backgroundColor: "#d91ccf",
   },
   header: {
     flex: 2,
@@ -26,15 +22,10 @@ const AquaTheme = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 32,
   },
-
   inputArea: {
     flex: 2,
-    // alignItems: "flex-end",
-    // justifyContent: "space-between",
-    //backgroundColor: "#23ddea",
   },
   inputView: {
-    //backgroundColor: "#d91ccf",
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -47,11 +38,11 @@ const AquaTheme = StyleSheet.create({
     height: 44,
     fontSize: 24,
     textAlign: "center",
-    backgroundColor: "white",
-    borderColor: "#037F8C",
+    backgroundColor: "#FFFFFF",
+    borderColor: "#000000",
   },
   numericInput: {
-    backgroundColor: "white",
+    backgroundColor: "#FFFFFF",
     borderRadius: 15,
   },
   labelText: {
@@ -59,7 +50,6 @@ const AquaTheme = StyleSheet.create({
     fontWeight: "bold",
   },
   radioView: {
-    // flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -67,15 +57,13 @@ const AquaTheme = StyleSheet.create({
   },
   buttonArea: {
     height: 150,
-    //flex: 1,
-    //backgroundColor: "#c8fb1e",
     alignItems: "center",
     justifyContent: "flex-start",
   },
   button: {
     borderWidth: 2,
     borderRadius: 15,
-    borderColor: "#037F8C",
+    borderColor: "#000000",
     padding: 10,
     marginTop: 30,
     width: 200,
@@ -88,8 +76,10 @@ const AquaTheme = StyleSheet.create({
     fontWeight: "bold",
   },
   resultArea: {
-    backgroundColor: "white",
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
     borderRadius: 15,
+    borderColor: "#000000",
     width: 150,
   },
   resultOk: {
@@ -97,7 +87,7 @@ const AquaTheme = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     textAlign: "center",
-    color: "lightgreen",
+    color: "#008c10ff",
     paddingBottom: 10,
   },
   resultCareful: {
@@ -105,7 +95,7 @@ const AquaTheme = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     textAlign: "center",
-    color: "orange",
+    color: "#fd8f00",
     paddingBottom: 10,
   },
   resultNo: {
@@ -113,28 +103,28 @@ const AquaTheme = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     textAlign: "center",
-    color: "red",
+    color: "#ff0000",
     paddingBottom: 10,
   },
   numericColor: "#038C8C",
-  borderColor: "black",
+  borderColor: "#000000",
   trackColor: "#767577",
-  thumbcolorLight: "#b314a6",
-  thumbcolorDark: "#038C8C",
+  thumbcolorPink: "#DA6CF5",
+  thumbcolorAqua: "#038C8C",
 });
 
 const PinkTheme = StyleSheet.create({
   ...AquaTheme,
   container: {
     ...AquaTheme.container,
-    backgroundColor: "#8FB6D9",
+    backgroundColor: "#D0C8FF",
   },
   button: {
     ...AquaTheme.button,
-    backgroundColor: "#b314a6",
+    backgroundColor: "#DA6CF5",
   },
 
-  numericColor: "#b314a6",
+  numericColor: "#DA6CF5",
 });
 
 export { AquaTheme, PinkTheme };

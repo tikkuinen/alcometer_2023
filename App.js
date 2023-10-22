@@ -29,11 +29,6 @@ export default function App() {
     return null;
   }
 
-  // toinen teema
-  // fontit
-  //border color eriksi
-  // eri komponentteihin jos haluut
-
   let currentStyle = style ? PinkTheme : AquaTheme;
 
   // Tuloksen ehdollisuus alkoholitason mukaan
@@ -46,6 +41,109 @@ export default function App() {
   } else {
     resultStyle = currentStyle.resultOk;
   }
+
+  const ToggleTheme = () => {
+    return (
+      <View style={currentStyle.switchArea}>
+        <Switch
+          value={style}
+          onValueChange={() => setStyle(!style)}
+          trackColor={{
+            false: currentStyle.trackColor,
+            true: currentStyle.trackColor,
+          }}
+          thumbColor={
+            style ? currentStyle.thumbcolorPink : currentStyle.thumbcolorAqua
+          }
+        ></Switch>
+      </View>
+    );
+  };
+
+  const BottleInput = () => {
+    return (
+      <>
+        <View style={currentStyle.inputView}>
+          <View>
+            <Text style={currentStyle.labelText}>Bottles</Text>
+          </View>
+          <View style={currentStyle.numericInput}>
+            <NumericInput
+              rounded
+              minValue={0}
+              maxValue={12}
+              value={bottles}
+              onChange={(val) => setBottles(val)}
+              borderColor={currentStyle.borderColor}
+              rightButtonBackgroundColor={currentStyle.numericColor}
+              leftButtonBackgroundColor={currentStyle.numericColor}
+            ></NumericInput>
+          </View>
+        </View>
+      </>
+    );
+  };
+
+  const TimeInput = () => {
+    return (
+      <>
+        <View style={currentStyle.inputView}>
+          <View>
+            <Text style={currentStyle.labelText}>Time</Text>
+          </View>
+          <View style={currentStyle.numericInput}>
+            <NumericInput
+              rounded
+              minValue={0}
+              maxValue={24}
+              value={time}
+              onChange={(val) => setTime(val)}
+              borderColor={currentStyle.borderColor}
+              rightButtonBackgroundColor={currentStyle.numericColor}
+              leftButtonBackgroundColor={currentStyle.numericColor}
+            ></NumericInput>
+          </View>
+        </View>
+      </>
+    );
+  };
+
+  const SexRadioButton = () => {
+    const radioButtons = useMemo(
+      () => [
+        {
+          id: "male",
+          label: "Male",
+          color: currentStyle.numericColor,
+          size: 40,
+          borderColor: "#000000",
+        },
+        {
+          id: "female",
+          label: "Female",
+          color: currentStyle.numericColor,
+          size: 40,
+          borderColor: "#000000",
+        },
+      ],
+      []
+    );
+
+    return (
+      <>
+        <View style={currentStyle.radioView}>
+          <View>
+            <RadioGroup
+              radioButtons={radioButtons}
+              onPress={setGender}
+              selectedId={gender}
+              layout="row"
+            />
+          </View>
+        </View>
+      </>
+    );
+  };
 
   const CalculateButton = () => {
     function calculate() {
@@ -83,108 +181,11 @@ export default function App() {
     );
   };
 
-  const SexRadioButton = () => {
-    const radioButtons = useMemo(
-      () => [
-        {
-          id: "male",
-          label: "Male",
-          color: currentStyle.numericColor,
-          size: 40,
-        },
-        {
-          id: "female",
-          label: "Female",
-          color: currentStyle.numericColor,
-          size: 40,
-        },
-      ],
-      []
-    );
-
-    return (
-      <>
-        <View style={currentStyle.radioView}>
-          <View>
-            <RadioGroup
-              radioButtons={radioButtons}
-              onPress={setGender}
-              selectedId={gender}
-              layout="row"
-            />
-          </View>
-        </View>
-      </>
-    );
-  };
-
-  const BottleInput = () => {
-    return (
-      <>
-        <View style={currentStyle.inputView}>
-          <View>
-            <Text style={currentStyle.labelText}>Bottles</Text>
-          </View>
-          <View style={currentStyle.numericInput}>
-            <NumericInput
-              rounded
-              minValue={0}
-              maxValue={12}
-              value={bottles}
-              onChange={(val) => setBottles(val)}
-              borderColor={currentStyle.numericColor}
-              rightButtonBackgroundColor={currentStyle.numericColor}
-              leftButtonBackgroundColor={currentStyle.numericColor}
-            ></NumericInput>
-          </View>
-        </View>
-      </>
-    );
-  };
-
-  const TimeInput = () => {
-    return (
-      <>
-        <View style={currentStyle.inputView}>
-          <View>
-            <Text style={currentStyle.labelText}>Time</Text>
-          </View>
-          <View style={currentStyle.numericInput}>
-            <NumericInput
-              rounded
-              minValue={0}
-              maxValue={24}
-              value={time}
-              onChange={(val) => setTime(val)}
-              borderColor={currentStyle.numericColor}
-              rightButtonBackgroundColor={currentStyle.numericColor}
-              leftButtonBackgroundColor={currentStyle.numericColor}
-            ></NumericInput>
-          </View>
-        </View>
-      </>
-    );
-  };
-
   return (
     <SafeAreaView style={currentStyle.container}>
       <ScrollView style={currentStyle.scrollView}>
         <View style={currentStyle.headerArea}>
-          <View style={currentStyle.switchArea}>
-            <Switch
-              value={style}
-              onValueChange={() => setStyle(!style)}
-              trackColor={{
-                false: currentStyle.trackColor,
-                true: currentStyle.trackColor,
-              }}
-              thumbColor={
-                style
-                  ? currentStyle.thumbcolorLight
-                  : currentStyle.thumbcolorDark
-              }
-            ></Switch>
-          </View>
+          <ToggleTheme />
           <View style={currentStyle.header}>
             <Text style={currentStyle.headerText}>Alcometer</Text>
           </View>
@@ -211,7 +212,6 @@ export default function App() {
           <TimeInput />
           <SexRadioButton />
         </View>
-
         <View style={currentStyle.buttonArea}>
           <View style={currentStyle.resultArea}>
             <Text style={resultStyle}>{level}</Text>
