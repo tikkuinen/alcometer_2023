@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { AquaTheme, PinkTheme } from "./styles/Styles";
+import { useFonts } from "expo-font";
 import NumericInput from "react-native-numeric-input";
 import RadioGroup from "react-native-radio-buttons-group";
 import {
@@ -19,6 +20,19 @@ export default function App() {
   const [time, setTime] = useState(1);
   const [level, setLevel] = useState(0);
   const [style, setStyle] = useState(false);
+
+  const [loaded] = useFonts({
+    LugrasimoRegular: require("./assets/fonts/Lugrasimo-Regular.ttf"),
+  });
+
+  if (!loaded) {
+    return null;
+  }
+
+  // toinen teema
+  // fontit
+  //border color eriksi
+  // eri komponentteihin jos haluut
 
   let currentStyle = style ? PinkTheme : AquaTheme;
 
@@ -75,10 +89,14 @@ export default function App() {
         {
           id: "male",
           label: "Male",
+          color: currentStyle.numericColor,
+          size: 40,
         },
         {
           id: "female",
           label: "Female",
+          color: currentStyle.numericColor,
+          size: 40,
         },
       ],
       []
@@ -114,7 +132,7 @@ export default function App() {
               maxValue={12}
               value={bottles}
               onChange={(val) => setBottles(val)}
-              borderColor={"#037F8C"}
+              borderColor={currentStyle.numericColor}
               rightButtonBackgroundColor={currentStyle.numericColor}
               leftButtonBackgroundColor={currentStyle.numericColor}
             ></NumericInput>
@@ -138,7 +156,7 @@ export default function App() {
               maxValue={24}
               value={time}
               onChange={(val) => setTime(val)}
-              borderColor={"#037F8C"}
+              borderColor={currentStyle.numericColor}
               rightButtonBackgroundColor={currentStyle.numericColor}
               leftButtonBackgroundColor={currentStyle.numericColor}
             ></NumericInput>
@@ -195,7 +213,9 @@ export default function App() {
         </View>
 
         <View style={currentStyle.buttonArea}>
-          <Text style={resultStyle}>{level}</Text>
+          <View style={currentStyle.resultArea}>
+            <Text style={resultStyle}>{level}</Text>
+          </View>
           <CalculateButton />
         </View>
       </ScrollView>

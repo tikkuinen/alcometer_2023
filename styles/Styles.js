@@ -7,7 +7,7 @@ const AquaTheme = StyleSheet.create({
   },
   headerArea: {
     //flex: 1,
-    height: 150,
+    height: 125,
     //backgroundColor: "blue",
   },
   switchArea: {
@@ -22,9 +22,9 @@ const AquaTheme = StyleSheet.create({
     justifyContent: "center",
   },
   headerText: {
+    fontFamily: "LugrasimoRegular",
     fontWeight: "bold",
     fontSize: 32,
-    // fontti
   },
 
   inputArea: {
@@ -77,7 +77,7 @@ const AquaTheme = StyleSheet.create({
     borderRadius: 15,
     borderColor: "#037F8C",
     padding: 10,
-    marginTop: 20,
+    marginTop: 30,
     width: 200,
     height: 50,
     alignItems: "center",
@@ -86,6 +86,11 @@ const AquaTheme = StyleSheet.create({
   buttonText: {
     fontSize: 24,
     fontWeight: "bold",
+  },
+  resultArea: {
+    backgroundColor: "white",
+    borderRadius: 15,
+    width: 150,
   },
   resultOk: {
     marginTop: 10,
@@ -100,7 +105,7 @@ const AquaTheme = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     textAlign: "center",
-    color: "yellow",
+    color: "orange",
     paddingBottom: 10,
   },
   resultNo: {
@@ -112,6 +117,7 @@ const AquaTheme = StyleSheet.create({
     paddingBottom: 10,
   },
   numericColor: "#038C8C",
+  borderColor: "black",
   trackColor: "#767577",
   thumbcolorLight: "#b314a6",
   thumbcolorDark: "#038C8C",
